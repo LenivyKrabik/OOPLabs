@@ -5,6 +5,7 @@
 #include "Lab1.h"
 #include "Work1.h"
 #include "Work2.h"
+#include "Work3.h"
 
 #include <string>
 
@@ -154,8 +155,21 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
             break;
         }
         case ID_WORK2:
-            Work2(hWnd);
+        {
+            int work2Result = Work2(hWnd);
+            BOOL work2Toggle = FALSE;
+            while (work2Result) {
+                if (work2Toggle) {
+                    work2Result = Work2(hWnd);
+                    work2Toggle = FALSE;
+                }
+                else {
+                    work2Result = Work3(hWnd);
+                    work2Toggle = TRUE;
+                }
+            }
             break;
+        }
         default:
             return DefWindowProc(hWnd, message, wParam, lParam);
         }

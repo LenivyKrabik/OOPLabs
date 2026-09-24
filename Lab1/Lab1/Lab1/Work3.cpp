@@ -1,7 +1,6 @@
 #include "resource3.h"
 #include "Work3.h"
 #include "framework.h"
-#include "Work2.h"
 
 static INT_PTR CALLBACK InnerWorkings(HWND hWorkWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
@@ -14,8 +13,7 @@ static INT_PTR CALLBACK InnerWorkings(HWND hWorkWnd, UINT message, WPARAM wParam
         switch (wmId)
         {
         case IDC_PREVIOUS_WORK3:
-            EndDialog(hWorkWnd, 0);
-            Work2(GetParent(hWorkWnd));
+            EndDialog(hWorkWnd, 1);
             return (INT_PTR)TRUE;
         case IDCANCEL:
             EndDialog(hWorkWnd, 0);
