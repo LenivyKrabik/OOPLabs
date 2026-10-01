@@ -1,8 +1,8 @@
 ﻿#include "ShapeEditor.h"
 
-void ShapeEditor::DrawPreview(HWND hWnd, HPEN hPen) {
+void ShapeEditor::DrawPreview(HWND hWnd) {
 	POINT pt;
-	HPEN hPenOld;
+	HPEN hPenOld, hPen;
 	HDC hdc;
 
 	hdc = GetDC(hWnd); //отримуємо контекст вікна для малювання

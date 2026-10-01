@@ -11,13 +11,11 @@ Shape* LineEditor::OnLBup(HWND) {
 		LBPressed = FALSE;
 		return res;
 	}
-	LBPressed = FALSE;
 	return 0;
 }
 void LineEditor::OnMouseMove(HWND hWnd) {
 	if (LBPressed) {
-		HPEN hPen = CreatePen(PS_SOLID, 1, RGB(255, 0, 0));
-		DrawPreview(hWnd, hPen);
+		DrawPreview(hWnd);
 	}
 }
 void LineEditor::OnPaint(HWND hWnd) {

@@ -7,9 +7,9 @@ Shape* PointEditor::OnLBup(HWND) {
 	if (LBPressed) {
 		Shape* res = new PointShape();
 		res->Set(mouseX, mouseY, 0, 0);
+		LBPressed = FALSE;
 		return res;
 	}
-	LBPressed = FALSE;
 	return 0;
 }
 void PointEditor::OnMouseMove(HWND hWnd) {

@@ -11,7 +11,6 @@ Shape* RectangleEditor::OnLBup(HWND) {
 		LBPressed = FALSE;
 		return res;
 	}
-	LBPressed = FALSE;
 	return 0;
 }
 void RectangleEditor::OnMouseMove(HWND hWnd) {

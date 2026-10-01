@@ -16,6 +16,6 @@ public:
 	virtual void OnMouseMove(HWND hWnd) = 0;
 	virtual void OnPaint(HWND) = 0;
 	virtual void DrawPreviewContour(HDC hdc) = 0;
-	void DrawPreview(HWND hWnd, HPEN hPen = NULL);
+	void DrawPreview(HWND hWnd);
 	//void OnInitMenuPopup(HWND, WPARAM); //додатковий інтерфейсний метод
 };

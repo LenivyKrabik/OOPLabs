@@ -36,8 +36,10 @@ void ShapeObjectsEditor::OnLBdown(HWND hWnd, LPARAM lParam) {
 void ShapeObjectsEditor::OnLBup(HWND hWnd) {
 	if (editor) {
 		Shape* res = editor->OnLBup(hWnd);
-		pcshape[NextShape++] = res;
-		InvalidateRect(hWnd, nullptr, TRUE);
+		if (res) {
+			pcshape[NextShape++] = res;
+			InvalidateRect(hWnd, nullptr, TRUE);
+		}
 	}
 }
 void ShapeObjectsEditor::OnMouseMove(HWND hWnd, LPARAM lParam) {
