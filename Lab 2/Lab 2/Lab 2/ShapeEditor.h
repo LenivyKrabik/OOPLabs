@@ -1,6 +1,5 @@
 ﻿#pragma once
 #include "Shape.h"
-#include <windowsx.h>
 
 class ShapeEditor
 {

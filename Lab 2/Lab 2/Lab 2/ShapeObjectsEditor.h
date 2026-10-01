@@ -1,6 +1,5 @@
 #pragma once
 
-#include "ShapeEditor.h"
 #include "PointEditor.h"
 #include "LineEditor.h"
 #include "RectangleEditor.h"
