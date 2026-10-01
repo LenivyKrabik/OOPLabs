@@ -24,5 +24,4 @@ public:
 	void OnLBup(HWND hWnd);
 	void OnMouseMove(HWND hWnd, LPARAM lParam);
 	void OnPaint(HWND);
-	void OnInitMenuPopup(HWND, WPARAM);
 };

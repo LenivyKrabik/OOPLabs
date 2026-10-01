@@ -31,7 +31,6 @@ void ShapeObjectsEditor::StartEllipseEditor(HWND hWnd) {
 void ShapeObjectsEditor::OnLBdown(HWND hWnd, LPARAM lParam) {
 	if (editor) {
 		editor->OnLBdown(hWnd);
-		InvalidateRect(hWnd, nullptr, TRUE);
 	}
 }
 void ShapeObjectsEditor::OnLBup(HWND hWnd) {
@@ -55,7 +54,4 @@ void ShapeObjectsEditor::OnPaint(HWND hWnd) {
 	}
 	EndPaint(hWnd, &ps);
 	if (editor) editor->OnPaint(hWnd);
-}
-void ShapeObjectsEditor::OnInitMenuPopup(HWND, WPARAM) {
-
 }
