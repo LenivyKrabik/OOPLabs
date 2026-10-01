@@ -3,7 +3,6 @@
 
 #include "framework.h"
 #include "Lab 2.h"
-#include "ShapeObjectsEditor.h"
 
 #define MAX_LOADSTRING 100
 
