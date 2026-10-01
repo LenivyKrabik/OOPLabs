@@ -136,9 +136,6 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
     case WM_MOUSEMOVE: //пересунуто мишу у клієнтській частині вікна
         MainEditor.OnMouseMove(hWnd, lParam);
         break;
-    case WM_INITMENUPOPUP: //позначка пунктів меню – якщо потрібно
-        MainEditor.OnInitMenuPopup(hWnd, wParam);
-        break;
     case WM_COMMAND:
         {
             int wmId = LOWORD(wParam);
