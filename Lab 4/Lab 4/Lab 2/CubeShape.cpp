@@ -40,6 +40,12 @@ void CubeShape::Show(HDC hdc) {
 	ys2 = extraCorner1y;
 	LineShape::Show(hdc);
 
+	xs1 = _xs1;
+	ys1 = _ys1;
+	xs2 = extraCorner1x;
+	ys2 = extraCorner1y;
+	LineShape::DrawPreviewContour(hdc);
+
 
 	xs1 = _xs1;
 	ys1 = _ys1;
@@ -101,4 +107,8 @@ void CubeShape::DrawPreviewContour(HDC hdc) {
 }
 Shape* CubeShape::Replicate() {
 	return new CubeShape();
+}
+
+CubeShape::CubeShape() {
+	isTransperent = TRUE;
 }
