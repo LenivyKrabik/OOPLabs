@@ -7,6 +7,7 @@
 #include "CubeShape.h"
 #include <stdio.h>
 #include <fstream>
+#include <shobjidl.h>
 #define N 106
 #define ID_ADD_FIGURE 32771
 #define ID_WIPEOUT 32772

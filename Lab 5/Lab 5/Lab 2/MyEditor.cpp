@@ -87,39 +87,64 @@ void MyEditor::SaveShapes() {
 }
 
 void MyEditor::LoadShapes(HWND hWnd) {
-	FILE* fin;
-	fopen_s(&fin, "saveFile.txt", "r");
-	if (fin)
-	{
-		//Deleting all off the previous stuff
-		for (int x = 0; x < NextShape; x++) {
-			delete pshape[x];
-		}
-		NextShape = 0;
-		PostMessage(hWnd, WM_COMMAND, ID_WIPEOUT,0);
 
-		char buf[4400];
-		int c = 0;
-		while (fgets(buf, 4400, fin))
-		{
-			char name[100] = { 0 };
-			long x1 = 0, y1 = 0, x2 = 0, y2 = 0;
+	IFileOpenDialog* pFileOpen = nullptr;
+	HRESULT hr = CoCreateInstance(CLSID_FileOpenDialog, NULL, CLSCTX_ALL, IID_PPV_ARGS(&pFileOpen));
 
-			int parsedCount = sscanf_s(buf, "%99[^,],%ld,%ld,%ld,%ld",
-				name, (unsigned)_countof(name),
-				&x1, &y1, &x2, &y2);
+	if (SUCCEEDED(hr)) {
+		hr = pFileOpen->Show(hWnd);
 
-			if (parsedCount == 5) {
-				Shape* shape = ShapeFactory::getShape(name);
-				shape->Set(x1, y1, x2, y2);
-				pshape[c++] = shape;
-				PostMessage(hWnd, WM_COMMAND, ID_ADD_FIGURE, reinterpret_cast<LPARAM>(shape->GetInfo()));
+		if (SUCCEEDED(hr)) {
+			IShellItem* pItem = nullptr;
+			hr = pFileOpen->GetResult(&pItem);
+
+			if (SUCCEEDED(hr)) {
+				PWSTR pszFilePath = nullptr;
+				hr = pItem->GetDisplayName(SIGDN_FILESYSPATH, &pszFilePath);
+
+				if (SUCCEEDED(hr)) {
+					
+					FILE* fin;
+					_wfopen_s(&fin, pszFilePath, L"r");
+					if (fin)
+					{
+						//Deleting all off the previous stuff
+						for (int x = 0; x < NextShape; x++) {
+							delete pshape[x];
+						}
+						NextShape = 0;
+						PostMessage(hWnd, WM_COMMAND, ID_WIPEOUT, 0);
+
+						char buf[4400];
+						int c = 0;
+						while (fgets(buf, 4400, fin))
+						{
+							char name[100] = { 0 };
+							long x1 = 0, y1 = 0, x2 = 0, y2 = 0;
+
+							int parsedCount = sscanf_s(buf, "%99[^,],%ld,%ld,%ld,%ld",
+								name, (unsigned)_countof(name),
+								&x1, &y1, &x2, &y2);
+
+							if (parsedCount == 5) {
+								Shape* shape = ShapeFactory::getShape(name);
+								shape->Set(x1, y1, x2, y2);
+								pshape[c++] = shape;
+								PostMessage(hWnd, WM_COMMAND, ID_ADD_FIGURE, reinterpret_cast<LPARAM>(shape->GetInfo()));
+							}
+
+						}
+						fclose(fin);
+						NextShape = c;
+						InvalidateRect(hWnd, nullptr, TRUE);
+
+					CoTaskMemFree(pszFilePath);
+				}
+				pItem->Release();
 			}
-			
 		}
-		fclose(fin);
-		NextShape = c;
-		InvalidateRect(hWnd, nullptr, TRUE);
+		pFileOpen->Release();
+	}
 	}
 }
 
